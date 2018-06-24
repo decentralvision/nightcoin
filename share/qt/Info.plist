@@ -7,23 +7,23 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Quantis-Qt</string>
+	<string>Nightcoin-Qt</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>Quantis-Qt</string>
+	<string>Nightcoin-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>co.Quantis.quantis-qt</string>
+	<string>co.Nightcoin.nightcoin-qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>co.Quantis.QuantisPayment</string>
+            <string>co.Nightcoin.NightcoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>Quantis</string>
+              <string>Nightcoin</string>
             </array>
           </dict>
         </array>
