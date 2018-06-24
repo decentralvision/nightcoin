@@ -53,3 +53,7 @@ License: Public domain
 Quantis Logo
 Designer: Quantis Team
 License: Creative Commons Attribution 4.0 International License
+
+Nightcoin Logo
+Designer: Decentral Vision
+License: Creative Commons Attribution 4.0 International License
