@@ -43,7 +43,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
 
 #if QT_VERSION >= 0x040700
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a Quantis address (e.g. QjemzSDBQuLyD4T2uimqFoNJafDxbmWTFu)"));
+    ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a Nightcoin address (e.g. QjemzSDBQuLyD4T2uimqFoNJafDxbmWTFu)"));
 #endif
 
     addEntry();
@@ -537,7 +537,7 @@ bool SendCoinsDialog::handleURI(const QString &uri)
     // URI has to be valid
     if (GUIUtil::parseBitcoinURI(uri, &rv))
     {
-        CQuantisCoinAddress address(rv.address.toStdString());
+        CNightcoinCoinAddress address(rv.address.toStdString());
         if (!address.IsValid())
             return false;
         pasteEntry(rv);
@@ -847,7 +847,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         CoinControlDialog::coinControl->destChange = CNoDestination();
         ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
 
-        CQuantisCoinAddress addr = CQuantisCoinAddress(text.toStdString());
+        CNightcoinCoinAddress addr = CNightcoinCoinAddress(text.toStdString());
 
         if (text.isEmpty()) // Nothing entered
         {
@@ -855,7 +855,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!addr.IsValid()) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Quantis address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Nightcoin address"));
         }
         else // Valid address
         {

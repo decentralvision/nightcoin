@@ -156,7 +156,7 @@ bool CWallet::LoadCScript(const CScript& redeemScript)
      * these. Do not add them to the wallet and warn. */
     if (redeemScript.size() > MAX_SCRIPT_ELEMENT_SIZE)
     {
-        std::string strAddr = CQuantisCoinAddress(redeemScript.GetID()).ToString();
+        std::string strAddr = CNightcoinCoinAddress(redeemScript.GetID()).ToString();
         LogPrintf("%s: Warning: This wallet contains a redeemScript of size %u which exceeds maximum size %i thus can never be redeemed. Do not use address %s.\n",
             __func__, redeemScript.size(), MAX_SCRIPT_ELEMENT_SIZE, strAddr);
         return true;
@@ -750,7 +750,7 @@ void CWallet::SyncTransaction(const CTransaction& tx, const CBlock* pblock, bool
         return; // Not one of ours
 
     // If a transaction changes 'conflicted' state, that changes the balance
-    // available of the outputs it spends. So Quantis those to be
+    // available of the outputs it spends. So Nightcoin those to be
     // recomputed, also:
     BOOST_FOREACH(const CTxIn& txin, tx.vin)
     {
@@ -2459,7 +2459,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 {
                     // Fill a vout to ourself
                     // TODO: pass in scriptChange instead of reservekey so
-                    // change transaction isn't always pay-to-Quantis-address
+                    // change transaction isn't always pay-to-Nightcoin-address
                     CScript scriptChange;
 
                     // coin control: send change to custom address
@@ -2738,7 +2738,7 @@ bool CWallet::UnlockStealthAddresses(const CKeyingMaterial& vMasterKeyIn)
             continue;
 
         CKeyID ckid = pubKey.GetID();
-        CQuantisCoinAddress addr(ckid);
+        CNightcoinCoinAddress addr(ckid);
 
         StealthKeyMetaMap::iterator mi = mapStealthKeyMeta.find(ckid);
         if (mi == mapStealthKeyMeta.end())
@@ -2826,7 +2826,7 @@ bool CWallet::UnlockStealthAddresses(const CKeyingMaterial& vMasterKeyIn)
         if (fDebug)
         {
             CKeyID keyID = cpkT.GetID();
-            CQuantisCoinAddress coinAddress(keyID);
+            CNightcoinCoinAddress coinAddress(keyID);
             printf("Adding secret to key %s.\n", coinAddress.ToString().c_str());
         };
 
@@ -3026,7 +3026,7 @@ bool CWallet::SendStealthMoneyToDestination(CStealthAddress& sxAddress, int64_t 
 
     CKeyID ckidTo = cpkTo.GetID();
 
-    CQuantisCoinAddress addrTo(ckidTo);
+    CNightcoinCoinAddress addrTo(ckidTo);
 
     if (SecretToPublicKey(ephem_secret, ephem_pubkey) != 0)
     {
@@ -3192,7 +3192,7 @@ bool CWallet::FindStealthTransactions(const CTransaction& tx, mapValue_t& mapNar
                     std::vector<uint8_t> vchEmpty;
                     AddCryptedKey(cpkE, vchEmpty);
                     CKeyID keyId = cpkE.GetID();
-                    CQuantisCoinAddress coinAddress(keyId);
+                    CNightcoinCoinAddress coinAddress(keyId);
                     std::string sLabel = it->Encoded();
                     SetAddressBookName(keyId, sLabel);
 
@@ -3255,7 +3255,7 @@ bool CWallet::FindStealthTransactions(const CTransaction& tx, mapValue_t& mapNar
                     CKeyID keyID = cpkT.GetID();
                     if (fDebug)
                     {
-                        CQuantisCoinAddress coinAddress(keyID);
+                        CNightcoinCoinAddress coinAddress(keyID);
                         printf("Adding key %s.\n", coinAddress.ToString().c_str());
                     };
 
@@ -3542,7 +3542,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
         CTxDestination address1;
         ExtractDestination(payee, address1);
-        CQuantisCoinAddress address2(address1);
+        CNightcoinCoinAddress address2(address1);
 
         LogPrintf("Masternode payment to %s\n", address2.ToString().c_str());
     }
@@ -3557,7 +3557,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
         CTxDestination address1;
         ExtractDestination(payeerewardaddress, address1);
-        CQuantisCoinAddress address2(address1);
+        CNightcoinCoinAddress address2(address1);
 
         LogPrintf("Masternode payment to %s\n", address2.ToString().c_str());
     }
@@ -3575,11 +3575,11 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
         CTxDestination address1;
         ExtractDestination(payee, address1);
-        CQuantisCoinAddress address2(address1);
+        CNightcoinCoinAddress address2(address1);
         
         CTxDestination address3;
         ExtractDestination(payeerewardaddress, address3);
-        CQuantisCoinAddress address4(address3);
+        CNightcoinCoinAddress address4(address3);
 
         LogPrintf("Masternode payment to %s\n", address2.ToString().c_str());
     }
@@ -3637,7 +3637,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         payments = txNew.vout.size() + 1;
         txNew.vout.resize(payments);
 
-        CQuantisCoinAddress devRewardAddress(getDevAddress(pindexPrev->nHeight+1));
+        CNightcoinCoinAddress devRewardAddress(getDevAddress(pindexPrev->nHeight+1));
         CScript devRewardscriptPubKey = GetScriptForDestination(devRewardAddress.Get());
 
         txNew.vout[payments-1].scriptPubKey = devRewardscriptPubKey;
@@ -4005,7 +4005,7 @@ bool CWallet::SetAddressBookName(const CTxDestination& address, const string& st
                              (fUpdated ? CT_UPDATED : CT_NEW) );
     if (!fFileBacked)
         return false;
-    return CWalletDB(strWalletFile).WriteName(CQuantisCoinAddress(address).ToString(), strName);
+    return CWalletDB(strWalletFile).WriteName(CNightcoinCoinAddress(address).ToString(), strName);
 }
 
 bool CWallet::DelAddressBookName(const CTxDestination& address)
@@ -4020,8 +4020,8 @@ bool CWallet::DelAddressBookName(const CTxDestination& address)
 
     if (!fFileBacked)
         return false;
-    CWalletDB(strWalletFile).EraseName(CQuantisCoinAddress(address).ToString());
-    return CWalletDB(strWalletFile).EraseName(CQuantisCoinAddress(address).ToString());
+    CWalletDB(strWalletFile).EraseName(CNightcoinCoinAddress(address).ToString());
+    return CWalletDB(strWalletFile).EraseName(CNightcoinCoinAddress(address).ToString());
 }
 
 bool CWallet::GetTransaction(const uint256 &hashTx, CWalletTx& wtx)

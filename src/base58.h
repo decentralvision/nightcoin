@@ -92,23 +92,23 @@ public:
     bool operator> (const CBase58Data& b58) const { return CompareTo(b58) >  0; }
 };
 
-/** base58-encoded Quantis addresses.
+/** base58-encoded Nightcoin addresses.
  * Public-key-hash-addresses have version 0 (or 111 testnet).
  * The data vector contains RIPEMD160(SHA256(pubkey)), where pubkey is the serialized public key.
  * Script-hash-addresses have version 5 (or 196 testnet).
  * The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
  */
-class CQuantisCoinAddress : public CBase58Data {
+class CNightcoinCoinAddress : public CBase58Data {
 public:
     bool Set(const CKeyID &id);
     bool Set(const CScriptID &id);
     bool Set(const CTxDestination &dest);
     bool IsValid() const;
 
-    CQuantisCoinAddress() {}
-    CQuantisCoinAddress(const CTxDestination &dest) { Set(dest); }
-    CQuantisCoinAddress(const std::string& strAddress) { SetString(strAddress); }
-    CQuantisCoinAddress(const char* pszAddress) { SetString(pszAddress); }
+    CNightcoinCoinAddress() {}
+    CNightcoinCoinAddress(const CTxDestination &dest) { Set(dest); }
+    CNightcoinCoinAddress(const std::string& strAddress) { SetString(strAddress); }
+    CNightcoinCoinAddress(const char* pszAddress) { SetString(pszAddress); }
 
     CTxDestination Get() const;
     bool GetKeyID(CKeyID &keyID) const;
@@ -118,7 +118,7 @@ public:
 /**
  * A base58-encoded secret key
  */
-class CQuantisCoinSecret : public CBase58Data
+class CNightcoinCoinSecret : public CBase58Data
 {
 public:
     void SetKey(const CKey& vchSecret);
@@ -127,11 +127,11 @@ public:
     bool SetString(const char* pszSecret);
     bool SetString(const std::string& strSecret);
 
-    CQuantisCoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
-    CQuantisCoinSecret() {}
+    CNightcoinCoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
+    CNightcoinCoinSecret() {}
 };
 
-template<typename K, int Size, CChainParams::Base58Type Type> class CQuantisCoinExtKeyBase : public CBase58Data
+template<typename K, int Size, CChainParams::Base58Type Type> class CNightcoinCoinExtKeyBase : public CBase58Data
 {
 public:
     void SetKey(const K &key) {
@@ -146,15 +146,15 @@ public:
         return ret;
     }
 
-    CQuantisCoinExtKeyBase(const K &key) {
+    CNightcoinCoinExtKeyBase(const K &key) {
         SetKey(key);
     }
 
-    CQuantisCoinExtKeyBase() {}
+    CNightcoinCoinExtKeyBase() {}
 };
 
-typedef CQuantisCoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CQuantisCoinExtKey;
-typedef CQuantisCoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CQuantisCoinExtPubKey;
+typedef CNightcoinCoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CNightcoinCoinExtKey;
+typedef CNightcoinCoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CNightcoinCoinExtPubKey;
 
 /** base58-encoded Bitcoin addresses.
  * Public-key-hash-addresses have version 0 (or 111 testnet).

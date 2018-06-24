@@ -167,7 +167,7 @@ Value smsglocalkeys(const Array& params, bool fHelp)
                 && !it->fReceiveEnabled)
                 continue;
             
-            CQuantisCoinAddress coinAddress(it->sAddress);
+            CNightcoinCoinAddress coinAddress(it->sAddress);
             if (!coinAddress.IsValid())
                 continue;
             
@@ -306,7 +306,7 @@ Value smsglocalkeys(const Array& params, bool fHelp)
             if (!IsMine(*pwalletMain, entry.first))
                 continue;
             
-            CQuantisCoinAddress coinAddress(entry.first);
+            CNightcoinCoinAddress coinAddress(entry.first);
             if (!coinAddress.IsValid())
                 continue;
             
@@ -461,7 +461,7 @@ Value smsggetpubkey(const Array& params, bool fHelp)
             return result;
     };
     
-    CQuantisCoinAddress coinAddress(address);
+    CNightcoinCoinAddress coinAddress(address);
     
     
     CKeyID keyID;

@@ -5,8 +5,8 @@ compiler:
   - gcc
 cache:
   directories:
-  - $HOME/docrypto/quantis/src/leveldb
-  - $HOME/docrypto/quantis/src/secp256k1
+  - $HOME/docrypto/nightcoin/src/leveldb
+  - $HOME/docrypto/nightcoin/src/secp256k1
 env:
   global:
     - MAKEJOBS=-j2

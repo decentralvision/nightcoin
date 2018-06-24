@@ -32,8 +32,8 @@
 *.app
 
 build/
-quantisd
-quantis-qt
+nightcoind
+nightcoin-qt
 Makefile
 src/leveldb
 src/qt/locale

@@ -1,9 +1,9 @@
-Building Quantis
+Building Nightcoin
 
-See doc/readme-qt.rst for instructions on building Quantis QT,
+See doc/readme-qt.rst for instructions on building Nightcoin QT,
 the intended-for-end-users, nice-graphical-interface, reference
-implementation of Quantis.
+implementation of Nightcoin.
 
-See doc/build-*.txt for instructions on building quantisd,
+See doc/build-*.txt for instructions on building nightcoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of Quantis.
+implementation of Nightcoin.
