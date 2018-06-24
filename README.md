@@ -19,8 +19,8 @@ Nightcoin is a hybrid PoW/PoS-based cryptocurrency with masternodes.
 
 ## PoS
 * PoS Reward:
-    * 3 QUAN to masternodes
-    * 2 QUAN to staking
+    * 3 NTC to masternodes
+    * 2 NTC to staking
 * PoS Minimum Age: 24 hours
 * PoS Maximum Age: none
 
